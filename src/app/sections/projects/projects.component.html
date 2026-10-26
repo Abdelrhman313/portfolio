@@ -1,0 +1,139 @@
+<section id="projects" class="container-site section-pad projects" aria-label="Projects — The Work" appSection="projects" [sectionThreshold]="0.2">
+  <div class="projects__header">
+    <app-section-heading kicker="04 · The Work" [lines]="headingLines" />
+    <div *ngIf="!hoverNone; else bareCta" class="projects__magnetic" appMagnetic>
+      <ng-container *ngTemplateOutlet="cta" />
+    </div>
+    <ng-template #bareCta><ng-container *ngTemplateOutlet="cta" /></ng-template>
+    <ng-template #cta><a class="btn btn--outline projects__cta" href="#contact">Get in touch →</a></ng-template>
+  </div>
+
+  <p class="projects__intro">
+    A selection of live projects that shaped my craft — from Angular dashboards and Firebase apps to responsive websites for clients.
+  </p>
+
+  <div class="projects__featured" #featuredWrap>
+    <a class="card" [href]="featured.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Open live project: ' + featured.title">
+      <div class="card__media">
+        <img
+          *ngIf="featured.image"
+          class="card__image"
+          [src]="featured.image"
+          [alt]="featured.title"
+          width="1280"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="card__play">
+          <div class="card__bubble"><app-icon name="arrow-up-right" /></div>
+        </div>
+        <div class="card__fade card__fade--side" aria-hidden="true"></div>
+        <div class="card__fade card__fade--bottom" aria-hidden="true"></div>
+      </div>
+      <div class="card__body">
+        <span class="card__corner" aria-hidden="true">/01 · Featured</span>
+        <div class="card__top">
+          <div class="card__meta">
+            <span class="card__badge">Featured</span>
+            <span class="card__kind">{{ featured.kind }}<span class="card__sep">·</span>{{ featured.host }}</span>
+          </div>
+          <h3 class="card__title">{{ featured.title }}</h3>
+          <p class="card__desc">{{ featured.description }}</p>
+        </div>
+        <div class="card__bottom">
+          <div class="card__tags">
+            <span class="pill" *ngFor="let tag of featured.tags.slice(0, 4)" [style]="pill(tag, '18', '40')">{{ tag.label }}</span>
+          </div>
+          <div class="card__footer">
+            <span class="card__cta">live project</span>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div>
+    <div class="divider">
+      <span class="divider__label">Also · in · the · work</span>
+      <span class="divider__line" aria-hidden="true"></span>
+      <span class="divider__count">{{ index(projects.length) }} entries</span>
+    </div>
+
+    <div class="rows" *ngIf="isDesktop; else mobileRows">
+      <a
+        *ngFor="let project of projects; let i = index"
+        #row
+        class="row"
+        [href]="project.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Open live project: ' + project.title"
+      >
+        <span class="row__line" aria-hidden="true"></span>
+        <div class="row__inner">
+          <span class="row__num">/{{ index(i + 2) }}</span>
+          <div class="row__text">
+            <h3 class="row__title">{{ project.title }}</h3>
+            <p class="row__summary">{{ project.summary }}</p>
+          </div>
+          <div class="row__tags">
+            <span class="pill pill--quiet" *ngFor="let tag of project.tags.slice(0, 3)" [style]="pill(tag, '14', '30')">{{ tag.label }}</span>
+          </div>
+          <div class="row__meta">
+            <span class="row__kind">{{ project.kind }}</span>
+            <span class="row__host">{{ project.host }}</span>
+          </div>
+          <div class="row__thumb" aria-hidden="true">
+            <img *ngIf="project.thumb; else thumbMonogram" [src]="project.thumb" alt="" width="240" height="150" loading="lazy" decoding="async" />
+            <ng-template #thumbMonogram><span class="monogram monogram--small">{{ monogram(project) }}</span></ng-template>
+            <span class="row__thumb-shade"></span>
+          </div>
+          <span class="row__arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+    </div>
+
+    <ng-template #mobileRows>
+      <div class="rows">
+        <a
+          *ngFor="let project of projects; let i = index"
+          #row
+          class="mrow"
+          [href]="project.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'Open live project: ' + project.title"
+        >
+          <div class="mrow__inner">
+            <span class="mrow__num">/{{ index(i + 2) }}</span>
+            <div class="mrow__body">
+              <div class="mrow__text">
+                <h3 class="mrow__title">{{ project.title }}</h3>
+                <p class="mrow__summary">{{ project.summary }}</p>
+                <div class="mrow__meta">
+                  <span>{{ project.kind }}</span>
+                  <span class="mrow__dot"></span>
+                  <span class="mrow__view">view →</span>
+                </div>
+              </div>
+              <div class="mrow__thumb">
+                <img *ngIf="project.thumb; else mobileMonogram" [src]="project.thumb" alt="" width="240" height="150" loading="lazy" decoding="async" />
+                <ng-template #mobileMonogram><span class="monogram">{{ monogram(project) }}</span></ng-template>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="projects__more">
+    <a class="more" href="#contact">
+      <span class="more__line" aria-hidden="true"></span>
+      want to see more? ask.
+      <span class="more__line" aria-hidden="true"></span>
+    </a>
+  </div>
+</section>

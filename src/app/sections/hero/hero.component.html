@@ -1,0 +1,57 @@
+<section id="hero" class="hero" #section aria-label="Hero — The Arrival" appSection="hero" [sectionThreshold]="0.3">
+  <div class="hero__bg" #bg>
+    <app-shader-background [progress]="scrollProgress" />
+  </div>
+  <div class="hero__spot hero__spot--outer" #spotOuter></div>
+  <div class="hero__spot hero__spot--inner" #spotInner></div>
+
+  <div class="hero__wrap" #wrap>
+    <div class="hero__left">
+      <div class="hero__text">
+        <div class="hero__head">
+          <div class="hero__accent" aria-hidden="true"></div>
+          <div class="hero__titles">
+            <p class="hero__eyebrow" #eyebrow>01 · The Arrival</p>
+            <h1 class="hero__title">
+              <span class="sr-only">{{ title }}</span>
+              <span class="hero__line hero__line--mobile" #titleLine aria-hidden="true">{{ title }}</span>
+              <span class="hero__line hero__line--first" #titleLine aria-hidden="true">{{ profile.displayName }}'s</span>
+              <span class="hero__line hero__line--second" #titleLine aria-hidden="true">Portfolio</span>
+            </h1>
+          </div>
+        </div>
+        <p class="hero__sub" #sub>{{ profile.tagline }}</p>
+        <div class="hero__ctas" #ctas>
+          <a class="btn btn--primary btn--ring" [href]="profile.resume.href" download>
+            {{ profile.resume.label }}
+            <app-icon name="download" />
+          </a>
+          <a class="btn btn--outline btn--ring" href="#contact">Contact Me</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right">
+      <app-spline-scene *ngIf="splineReady && isDesktop" [scene]="sceneUrl" />
+    </div>
+  </div>
+
+  <div class="hero__mobile-robot-box">
+    <div class="hero__mobile-robot">
+      <app-spline-scene *ngIf="splineReady && !isDesktop" [scene]="sceneUrl" />
+    </div>
+  </div>
+
+  <div class="hero__bar" #bar aria-hidden="true">
+    <span class="hero__bar-left">{{ profile.stack.join(' · ') }}</span>
+    <div class="hero__bar-mid">
+      <div class="hero__scroll" #indicator>
+        <span>scroll</span>
+        <div class="hero__pill"><div class="hero__dot"></div></div>
+      </div>
+    </div>
+    <div class="hero__bar-right">
+      <div class="hero__status"></div>
+      <span>Available for work</span>
+    </div>
+  </div>
+</section>

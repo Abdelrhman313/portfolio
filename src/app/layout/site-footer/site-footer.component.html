@@ -1,0 +1,28 @@
+<footer class="footer">
+  <div class="container-site footer__inner">
+    <div>
+      <p class="footer__brand">Portfolio</p>
+      <p class="footer__tagline">Built with craft and care.</p>
+    </div>
+    <div class="footer__links">
+      <a
+        *ngFor="let link of links"
+        class="footer__link"
+        [class.is-dimmed]="hovered !== null && hovered !== link.label"
+        [href]="link.href"
+        [attr.target]="link.brand === 'gmail' ? null : '_blank'"
+        rel="noreferrer"
+        (mouseenter)="enter(link.label)"
+        (mouseleave)="leave(link.label)"
+      >
+        <span class="footer__label">{{ link.label }}</span>
+        <div class="footer__icon" #icon aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="48" height="48" [attr.fill]="colors[link.brand]">
+            <path [attr.d]="paths[link.brand]" />
+          </svg>
+        </div>
+      </a>
+    </div>
+    <p class="footer__copy">© {{ year }}</p>
+  </div>
+</footer>

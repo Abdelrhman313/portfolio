@@ -1,0 +1,114 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.about {
+  &__grid {
+    display: grid;
+    align-items: start;
+    gap: 48px;
+
+    @include up(md) {
+      grid-template-columns: 3fr 2fr;
+      gap: 64px;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__lead {
+    font-size: 18px;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+
+  &__highlight {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  &__current {
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+
+  &__right {
+    display: none;
+
+    @include up(md) {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__avatar-mobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+    app-avatar-card {
+      max-width: 260px;
+    }
+
+    @include up(md) {
+      display: none;
+    }
+  }
+
+  &__built {
+    max-width: 672px;
+    margin-top: 48px;
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+
+    @include up(md) {
+      margin-top: 64px;
+      font-size: 18px;
+    }
+  }
+
+  &__outro {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: italic;
+    color: rgba(168, 159, 144, 0.5);
+  }
+}
+
+.marker {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+
+  &__bar {
+    position: absolute;
+    inset: -2px -5px;
+    border-radius: 3px;
+    border: 1px solid rgba(200, 96, 42, 0.28);
+    background: rgba(200, 96, 42, 0.14);
+    transform-origin: left center;
+    transform: scaleX(0);
+    pointer-events: none;
+  }
+
+  &__text {
+    position: relative;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+}

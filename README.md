@@ -1,27 +1,33 @@
-# Portfolio
+# Abdelrhman Yasser — Portfolio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+Personal portfolio built with Angular 16 (standalone components), SCSS, GSAP + ScrollTrigger, Lenis smooth scrolling and a Spline 3D scene.
 
-## Development server
+## Run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm install
+npm start          # dev server on http://localhost:4200
+npm run build      # production build in dist/portfolio
+npm test           # unit tests (Karma)
+```
 
-## Code scaffolding
+## Editing content
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+All text, links and project data live in `src/app/data/`:
 
-## Build
+- `portfolio.data.ts` — profile, about copy, experience, projects and skills.
+- `site.config.ts` — the hero's Spline scene URL and the optional contact-form endpoint.
+- `brand-icons.ts` — skill logos (Simple Icons, CC0).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Images are in `src/assets/images/` (avatar, project screenshots and thumbnails, social preview), and the downloadable résumé is `src/assets/Abdelrhman-Yasser-Ibrahim-Resume.pdf`.
 
-## Running unit tests
+## Contact form
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+With `contactEndpoint` empty, submitting the form opens the visitor's email app with the message pre-filled. To deliver messages directly, set `contactEndpoint` to a service that accepts a JSON `POST` of `{ name, email, message }` (for example a Formspree form URL).
 
-## Running end-to-end tests
+## Structure
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `src/app/core` — GSAP setup, Lenis, media queries, active-section tracking, intro and toast services.
+- `src/app/layout` — preloader, nav, scroll progress, section rail, custom cursor, footer, toaster.
+- `src/app/sections` — hero, about, experience, projects, skills, contact.
+- `src/app/shared` — section heading, icons, text-reveal and magnetic directives.

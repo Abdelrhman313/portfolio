@@ -1,0 +1,10 @@
+<div class="sh" #root>
+  <div class="sh__bar" aria-hidden="true"></div>
+  <div class="sh__col">
+    <p class="sh__kicker" #kickerEl>{{ kicker }}</p>
+    <h2 class="sh__title" #titleEl>
+      <span class="sr-only">{{ lines.join(' ') }}</span>
+      <span class="title-line" #line aria-hidden="true" *ngFor="let line of lines">{{ line }}</span>
+    </h2>
+  </div>
+</div>

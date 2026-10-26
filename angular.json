@@ -30,9 +30,16 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fontsource/jetbrains-mono/400.css",
+              "node_modules/@fontsource/jetbrains-mono/500.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -44,8 +51,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "12kb",
+                  "maximumError": "16kb"
                 }
               ],
               "outputHashing": "all"
@@ -93,9 +100,16 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fontsource/jetbrains-mono/400.css",
+              "node_modules/@fontsource/jetbrains-mono/500.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            }
           }
         }
       }

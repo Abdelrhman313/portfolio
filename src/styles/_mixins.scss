@@ -1,0 +1,37 @@
+@use 'sass:map';
+
+// Same breakpoints as the reference (Tailwind v4 defaults, min-width only).
+$breakpoints: (
+  sm: 40rem,
+  md: 48rem,
+  lg: 64rem,
+  xl: 80rem,
+);
+
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Every hover style lives behind (hover: hover) so taps never leave sticky states.
+@mixin can-hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @include can-hover {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}

@@ -1,0 +1,72 @@
+<section id="skills" class="container-site section-pad skills" #section aria-label="Skills — The Practice" appSection="skills" [sectionThreshold]="0.3">
+  <div class="skills__grid">
+    <div class="skills__left">
+      <app-section-heading kicker="05 · The Practice" [lines]="headingLines" />
+      <p class="skills__lede">
+        The technologies I reach for every day — from Angular and RxJS to styling systems, data and the tools that ship it.
+      </p>
+      <div class="skills__legend" *ngIf="orbitMode">
+        <div class="skills__legend-row">
+          <div class="skills__legend-line" [style.background]="rings[0].accent" aria-hidden="true"></div>
+          <span>Inner — Frontend core</span>
+        </div>
+        <div class="skills__legend-row">
+          <div class="skills__legend-line" [style.background]="rings[1].accent" aria-hidden="true"></div>
+          <span>Outer — Styling, data &amp; tools</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills__orbit-wrap" *ngIf="orbitMode; else chips">
+      <div class="orbit" #orbit role="img" [attr.aria-label]="orbitLabel">
+        <div
+          *ngFor="let ring of rings; let r = index"
+          class="ring ring--{{ r }}"
+          [style.width.px]="ring.radius * 2"
+          [style.height.px]="ring.radius * 2"
+          [style.left.px]="220 - ring.radius"
+          [style.top.px]="220 - ring.radius"
+          [style.border-color]="ring.accent + (r === 0 ? '55' : '44')"
+          [style.box-shadow]="r === 0 ? '0 0 30px ' + ring.accent + '22' : '0 0 40px ' + ring.accent + '18'"
+        >
+          <div class="bubble" *ngFor="let skill of ring.skills">
+            <div class="bubble__hit" (mouseenter)="setHovered(skill)" (mouseleave)="setHovered(null)">
+              <div
+                class="bubble__disc"
+                [class.is-hovered]="hovered === skill"
+                [style.border-color]="hovered === skill ? ring.accent : null"
+                [style.box-shadow]="hovered === skill ? '0 0 20px ' + ring.accent + '44' : null"
+              >
+                <svg *ngIf="skill.icon; else abbr" viewBox="0 0 24 24" width="22" height="22" [attr.fill]="skill.color" aria-hidden="true">
+                  <path [attr.d]="icons[skill.icon]" />
+                </svg>
+                <ng-template #abbr><span class="bubble__abbr" [style.color]="skill.color">{{ initialsOf(skill) }}</span></ng-template>
+              </div>
+              <div class="bubble__tip" *ngIf="hovered === skill">
+                <span>{{ skill.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="orbit__center">
+          {{ initials }}
+          <span class="orbit__pulse orbit__pulse--near" aria-hidden="true"></span>
+          <span class="orbit__pulse orbit__pulse--far" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #chips>
+      <ul class="skills__chips">
+        <li
+          *ngFor="let skill of skills"
+          class="chip"
+          [style.color]="skill.ring === 'inner' ? 'var(--terracotta-text)' : ringAccent(skill)"
+          [style.border-color]="ringAccent(skill) + (skill.ring === 'inner' ? '55' : '44')"
+        >
+          {{ skill.name }}
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+</section>

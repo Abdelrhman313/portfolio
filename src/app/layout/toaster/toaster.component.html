@@ -1,0 +1,15 @@
+<section aria-label="Notifications" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false">
+  <ol class="toaster" *ngIf="views.length">
+    <li
+      class="toast"
+      *ngFor="let view of views; trackBy: trackById"
+      [class.is-shown]="view.shown"
+      tabindex="0"
+      (mouseenter)="pause(view)"
+      (mouseleave)="resume(view)"
+    >
+      <span class="toast__icon"><app-icon name="octagon-x" /></span>
+      <span class="toast__title">{{ view.message }}</span>
+    </li>
+  </ol>
+</section>

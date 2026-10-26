@@ -1,0 +1,23 @@
+<section id="about" class="container-site section-pad about" aria-label="About — The Origin" appSection="about" [sectionThreshold]="0.5">
+  <div class="about__grid">
+    <div class="about__left">
+      <app-section-heading kicker="02 · The Origin" [lines]="headingLines" />
+      <div class="about__intro" #intro>
+        <div appTextReveal>
+          <p class="about__lead"><ng-container *ngFor="let run of about.lead"><span *ngIf="run.mark; else plainLead" class="about__highlight" #highlight>{{ run.text }}</span><ng-template #plainLead>{{ run.text }}</ng-template></ng-container></p>
+          <p class="about__current">{{ about.current }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="about__right">
+      <app-avatar-card [src]="avatar" [alt]="profile.fullName" [initials]="profile.initials" />
+    </div>
+  </div>
+
+  <div class="about__avatar-mobile">
+    <app-avatar-card [src]="avatar" [alt]="profile.fullName" [initials]="profile.initials" />
+  </div>
+
+  <p class="about__built" #builtOn><ng-container *ngFor="let run of about.builtOn"><span *ngIf="run.mark; else plainRun" class="marker"><span class="marker__bar" #markerBar aria-hidden="true"></span><span class="marker__text">{{ run.text }}</span></span><ng-template #plainRun>{{ run.text }}</ng-template></ng-container></p>
+  <p class="about__outro">{{ about.outro }}</p>
+</section>

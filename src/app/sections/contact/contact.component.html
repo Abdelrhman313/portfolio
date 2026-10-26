@@ -1,0 +1,82 @@
+<section id="contact" class="container-site contact" aria-label="Contact — The Next Step" appSection="contact" [sectionThreshold]="0.3">
+  <div class="contact__grid">
+    <div class="contact__left">
+      <app-section-heading kicker="06 · The Next Step" [lines]="headingLines" />
+      <div class="contact__intro" appTextReveal>
+        <p class="contact__text">
+          Whether you have a project in mind, want to collaborate, or just want to talk craft — I'd love to hear from you.
+        </p>
+        <dl class="contact__details">
+          <div class="contact__detail">
+            <dt>Email</dt>
+            <dd><a [href]="'mailto:' + profile.email">{{ profile.email }}</a></dd>
+          </div>
+          <div class="contact__detail">
+            <dt>Phone</dt>
+            <dd>
+              <ng-container *ngFor="let phone of profile.phones; let last = last">
+                <a [href]="phone.href">{{ phone.label }}</a><span *ngIf="!last" class="contact__sep">·</span>
+              </ng-container>
+            </dd>
+          </div>
+          <div class="contact__detail">
+            <dt>Based in</dt>
+            <dd>{{ profile.location }}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact__stage" #stage>
+        <div class="contact__done" #doneEl aria-live="polite">
+          <ng-container *ngIf="done">
+            <span class="contact__done-icon" aria-hidden="true"><app-icon name="mail-check" /></span>
+            <h3 class="contact__done-title">{{ done.title }}</h3>
+            <p class="contact__done-text">{{ done.text }}</p>
+            <p class="contact__done-note" *ngIf="done.viaEmailApp">
+              Nothing opened? Write to <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>.
+            </p>
+          </ng-container>
+        </div>
+
+        <form class="contact__form" #formEl [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" formControlName="name" placeholder="Your name" autocomplete="name"
+              [attr.aria-invalid]="showError('name')" [attr.aria-describedby]="showError('name') ? 'name-error' : null" />
+            <p class="field__error" id="name-error" *ngIf="showError('name')">{{ errors.name }}</p>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" placeholder="your@email.com" autocomplete="email"
+              [attr.aria-invalid]="showError('email')" [attr.aria-describedby]="showError('email') ? 'email-error' : null" />
+            <p class="field__error" id="email-error" *ngIf="showError('email')">{{ errors.email }}</p>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" formControlName="message" placeholder="What are you working on?"
+              [attr.aria-invalid]="showError('message')" [attr.aria-describedby]="showError('message') ? 'message-error' : null"></textarea>
+            <p class="field__error" id="message-error" *ngIf="showError('message')">{{ errors.message }}</p>
+          </div>
+
+          <div *ngIf="!hoverNone; else bareSubmit" class="contact__magnetic" appMagnetic>
+            <ng-container *ngTemplateOutlet="submitButton" />
+          </div>
+          <ng-template #bareSubmit><ng-container *ngTemplateOutlet="submitButton" /></ng-template>
+          <ng-template #submitButton>
+            <button type="submit" class="contact__submit" [disabled]="sending">
+              <span *ngIf="sending; else idle" class="contact__sending">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round" />
+                </svg>
+                Sending…
+              </span>
+              <ng-template #idle>Send it →</ng-template>
+            </button>
+          </ng-template>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

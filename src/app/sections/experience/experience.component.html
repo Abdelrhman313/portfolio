@@ -1,0 +1,62 @@
+<section
+  id="experience"
+  class="container-site section-pad experience"
+  aria-label="Experience — The Journey"
+  appSection="experience"
+  [sectionThreshold]="0.2"
+  (sectionEnter)="autoOpen()"
+>
+  <app-section-heading kicker="03 · The Journey" [lines]="headingLines" />
+
+  <div class="timeline" #timeline>
+    <div class="timeline__line" #line></div>
+    <div>
+      <div class="row" #row *ngFor="let job of jobs; let i = index">
+        <div class="row__dot" #dot [style.background-color]="alpha(job.accent, 0.3)"></div>
+        <button
+          type="button"
+          class="row__btn"
+          [attr.aria-expanded]="openIndex === i"
+          [attr.aria-controls]="'experience-panel-' + i"
+          (click)="toggle(i)"
+        >
+          <span class="row__num" #num aria-hidden="true" [style.color]="alpha(job.accent, 0.18)">{{ index(i) }}</span>
+          <div class="row__main">
+            <p class="row__role">{{ job.role }}</p>
+            <p class="row__meta"><span [style.color]="job.accent">{{ job.company }}</span> · {{ job.location }}</p>
+            <p class="row__date-mobile">{{ job.period }}</p>
+          </div>
+          <div class="row__side">
+            <span class="row__date">{{ job.period }}</span>
+            <span class="row__hint" [style.color]="openIndex === i ? job.accent : 'rgba(255,255,255,0.48)'">
+              {{ openIndex === i ? '↑ collapse' : '↓ expand' }}
+            </span>
+          </div>
+        </button>
+        <div class="row__panel" #panel [id]="'experience-panel-' + i" [attr.inert]="openIndex === i ? null : ''">
+          <div class="row__inner" [style.border-top-color]="alpha(job.accent, 0.12)">
+            <p class="row__desc">{{ job.summary }}</p>
+            <div class="row__tags">
+              <span
+                class="tag"
+                *ngFor="let tag of job.tags"
+                [style.color]="job.accent"
+                [style.background]="alpha(job.accent, 0.08)"
+                [style.border-color]="alpha(job.accent, 0.22)"
+                >{{ tag }}</span
+              >
+            </div>
+            <ul class="row__list">
+              <li *ngFor="let highlight of job.highlights; let j = index">
+                <span class="row__idx" [style.color]="job.accent">{{ index(j) }} ·</span>{{ highlight }}
+              </li>
+            </ul>
+            <a class="row__site" [href]="job.companyUrl" target="_blank" rel="noopener noreferrer" [style.color]="job.accent">
+              {{ host(job.companyUrl) }} ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<div class="rail" aria-hidden="true">
+  <div class="rail__track"></div>
+  <div class="rail__fill" #fill></div>
+  <div class="rail__orb" *ngFor="let label of labels; let i = index" [style.top.%]="positions[i]">
+    <span class="rail__pulse" *ngIf="i === active"></span>
+    <div class="rail__dot" [class.is-active]="i === active"></div>
+    <span class="rail__label" *ngIf="i === active">{{ label }}</span>
+  </div>
+</div>

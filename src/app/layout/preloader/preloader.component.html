@@ -1,0 +1,17 @@
+<div class="preloader" #root role="presentation" aria-hidden="true">
+  <div class="preloader__noise"></div>
+  <div class="preloader__stack">
+    <div class="preloader__ring" #ring>
+      <div class="preloader__dash" #ringDash></div>
+      <img class="preloader__avatar" [src]="avatar" alt="" />
+    </div>
+    <div class="preloader__monogram" #monogram>{{ initials }}</div>
+    <div class="preloader__rule" #rule></div>
+    <div class="preloader__title" #title></div>
+    <div class="preloader__subtitle" #subtitle>01 · Forging your experience</div>
+    <div class="preloader__progress" #progressRow>
+      <div class="preloader__track"><div class="preloader__bar" #bar></div></div>
+      <span class="preloader__percent" #percent>0%</span>
+    </div>
+  </div>
+</div>

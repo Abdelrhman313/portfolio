@@ -1,0 +1,81 @@
+@use 'mixins' as *;
+
+.rail {
+  position: fixed;
+  top: 0;
+  left: 24px;
+  z-index: 30;
+  display: none;
+  width: 20px;
+  height: 100vh;
+  pointer-events: none;
+
+  @include up(md) {
+    display: block;
+  }
+
+  &__track,
+  &__fill {
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+  }
+
+  &__track {
+    transform: translateX(-50%);
+    background: rgba(200, 96, 42, 0.15);
+  }
+
+  &__fill {
+    top: 0;
+    transform-origin: top center;
+    transform: translateX(-50%) scaleY(0);
+    background: #c8602a;
+    box-shadow: 0 0 6px rgba(200, 96, 42, 0.5);
+  }
+
+  &__orb {
+    position: absolute;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+  }
+
+  &__dot {
+    display: flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(58, 69, 85, 0.8);
+    background: transparent;
+    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.is-active {
+      width: 16px;
+      height: 16px;
+      border: none;
+      background: #c8602a;
+      box-shadow: 0 0 10px rgba(200, 96, 42, 0.5);
+    }
+  }
+
+  &__pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(200, 96, 42, 0.4);
+    animation: orb-pulse 2.5s ease-in-out infinite;
+  }
+
+  &__label {
+    position: absolute;
+    left: 20px;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--terracotta-text);
+  }
+}

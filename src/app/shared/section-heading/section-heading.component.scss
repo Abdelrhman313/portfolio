@@ -1,0 +1,59 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.sh {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  &__bar {
+    flex: none;
+    width: 3px;
+    height: 80px;
+    margin-top: 6px;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #c8602a, rgba(200, 96, 42, 0.1));
+
+    @include up(md) {
+      height: 150px;
+    }
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta-text);
+    opacity: 0;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: var(--foreground);
+    opacity: 0;
+    will-change: transform;
+
+    @include up(md) {
+      font-size: 48px;
+    }
+  }
+}
+
+.title-line {
+  display: block;
+}
